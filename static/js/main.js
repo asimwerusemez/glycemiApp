@@ -1,0 +1,1 @@
+const message_input = document.getElementById("id_message").focus()

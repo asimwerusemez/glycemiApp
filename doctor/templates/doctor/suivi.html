@@ -1,0 +1,76 @@
+{% extends 'base_doctor.html' %}
+
+{% block message %}
+{{ all_message }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="container">
+    <div class="contenu-suivi">
+        {% for user in users %}
+        <div class="contenue">
+            <div class="pofile-info">
+                <img src="{{ user.photo_profile.url }}" alt="" width="100">
+                <div>
+                    <p> {{ user.username }} </p>
+                    <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                </div>
+            </div>
+            <div>
+                <h5>L'etant du patient</h5>
+                <p>Taux du sucre <strong>{{ user.gycemie.taux_sucre }}g</strong></p>
+                {% if user.gycemie.soif_intense == 0 %}
+                    <p>Soif intensif <strong>Non</strong></p>
+                {% else %}
+                    <p>Soif intensif <strong>Oui</strong></p>
+                {% endif %}
+                
+                {% if user.gycemie.fatigue_extreme == 0 %}
+                    <p>Fatigue extreme <strong>Non</strong></p>
+                {% else %}
+                    <p>Fatigue extreme <strong>Oui</strong></p>
+                {% endif %}
+
+                {% if user.gycemie.vision_flou == 0 %}
+                    <p>Vision flou <strong>Non</strong></p>
+                {% else %}
+                    <p>Vision flou <strong>Oui</strong></p>
+                {% endif %}
+
+                {% if user.gycemie.secheresse_bouche == 0 %}
+                    <p>Secheresse bouche <strong>Non</strong></p>
+                {% else %}
+                    <p>Secheresse bouche <strong>Oui</strong></p>
+                {% endif %}
+
+                {% if user.gycemie.perte_poid == 0 %}
+                    <p>Perte poid <strong>Non</strong></p>
+                {% else %}
+                    <p>Perte poid <strong>Oui</strong></p>
+                {% endif %}
+
+                {% if user.gycemie.cicatrisation_lente == 0 %}
+                    <p>Cicatrisation lente <strong>Non</strong></p>
+                {% else %}
+                    <p>Cicatrisation lente <strong>Oui</strong></p>
+                {% endif %}
+
+                {% if user.gycemie.infection_frequente == 0 %}
+                    <p>Infection frequente <strong>Non</strong></p>
+                {% else %}
+                    <p>Infection frequente <strong>Oui</strong></p>
+                {% endif %}
+            </div>
+            <div>
+                <p><a href="{% url 'doctor:sendMessage'%}">Envoyer un Message</a></p>
+                <p><a href="#">consulter</a></p>
+            </div>
+        </div>
+            {% endfor %}
+    </div>
+</section>
+
+
+{% endblock content %}

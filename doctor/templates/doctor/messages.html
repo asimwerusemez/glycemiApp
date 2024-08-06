@@ -1,0 +1,60 @@
+{% extends 'base_doctor.html' %}
+
+
+{% block message %}
+
+{{ all_message }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="mt-2 mb-5 message-send-see">
+    <div class="container container-all-messages">
+        <a href="{% url 'doctor:suivi' %}"><i class="fa-solid fa-xmark fermer-messages"></i></a>
+        <div class="see-messages mb-5">
+            <p class="mt-4" style="color: grey; font-size: 12px;">Total messages: {{ all_message }}</p>
+            {% for message in messages_recus %}
+            {% if message.expediteur.isDoctor %}
+                <div class="msg-doct">
+                    <img src="{{ message.expediteur.photo_profile.url }}" alt="" width="">
+                    <div>
+                        <div class="data-name">
+                            <p class="name">{{ message.expediteur.username }}</p>
+                            <p class="date">{{ message.created_at }}</p>
+                        </div>
+                        <p>{{ message.message }}</p>
+                    </div>
+                </div>
+            {% else %}
+            <div class="msg-doct" style="margin-left: 45px;">
+                <img src="{{ message.expediteur.photo_profile.url }}" alt="" width="">
+                <div>
+                    <div class="data-name">
+                        <p class="name">{{ message.expediteur.username }}</p>
+                        <p class="date">{{ message.created_at }}</p>
+                    </div>
+                    <p>{{ message.message }}</p>
+                </div>
+            </div>
+            {% endif %}
+            
+            {% empty %}
+            <ul>
+                <li>No messages received yet.</li>
+            </ul>
+            {% endfor %}
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="form-messages">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-messages"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+
+    </div>
+
+</section>
+
+
+{% endblock content %}

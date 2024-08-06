@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/bootstrap/css_bootstrap.css' %}">
+  <script src="{% static 'css/bootstrap/bootstrap.js' %}" defer></script>
+
+  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+  
+  <!-- my css and js -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script src="{% static 'js/main.js' %}" defer></script>
+  <script src="{% static 'js/chart.js' %}"></script>
+  <title>
+    {% block title %}
+
+    {% endblock %}
+  </title>
+</head>
+<body>
+
+  <header id="header" class="header sticky-top">
+
+    <div class="top_top__bar">
+      <div class="topbar d-flex align-items-center container">
+        <div class="connexion-welcome">
+          <p>
+            Bienvenue  
+            {% if user.is_authenticated and user.isPatient %}
+              {{ user.username }}
+            {% endif %}
+          </p>
+          <p><a href="{% url 'accounts:logout' %}">Se Déconnecter</a></p>
+        </div>
+
+        <div class="message-notification">
+          <p><a href="{% url 'doctor:sendMessage' %}"><i class="fa-solid fa-message"></i></a></p>
+          <span>
+            {% block message %}
+            {% endblock %}
+          </span>
+        </div>
+        <div class="message-notification">
+          <p><a href="#"><i class="fa-solid fa-bell"></i></a></p>
+          <span>0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+
+        <a href="/doctor/" class="logo d-flex align-items-center me-auto">
+          <img src="{% static 'images/logo.png' %}" alt="logo">
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/patient/" class="active">Accueil<br></a></li>
+            <li><a href="#">Consultation</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {% block content %}
+  {% endblock %}
+
+</body>
+</html>

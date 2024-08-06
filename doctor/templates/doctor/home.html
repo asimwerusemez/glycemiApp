@@ -1,0 +1,112 @@
+{% extends 'base_doctor.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<section class="container mt-5 mb-5">
+    <div class="row">
+        <div class="main-see col-md-8">
+            <div class="main-see_show">
+                <div class="Total-patient">
+                    <h1>Total Patients</h1>
+                    <div>
+                        <h2>{{ all_users }}</h2>
+                        <div>
+                            <img src="{% static 'images/Icons - Widget Illustration.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="critique-Total">
+                    <h4>Total cas critique en pourcentage</h4>
+                    <div>
+                        <h2>50%</h2>
+                        <div>
+                            <img src="{% static 'images/pourcentage_patients.png' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="graphic-view-ecolutions">
+                <div>
+                    <p>Rapport du capteur</p>
+                </div>
+                <div class="graphic">
+                    <canvas id="graphic-capteur"></canvas>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="aside-see col-md-4">
+            <div class="evolutions">
+                <h5>cas critiques détecter par le capteur </h5>
+
+                <p>25 sur 120 patients</p>
+                <div>
+                </div>
+            </div>
+
+            <div class="Alimentation">
+                <h3>Alimentation</h3>
+                <ul>
+                    <li>Legumes</li>
+                    <li>Viandes</li>
+                    <li>Poissons</li>
+                </ul>
+            </div>
+
+            <div class="Alimentation">
+                <h3>Médicaments</h3>
+                <ul>
+                    <li>mdicam1</li>
+                    <li>mdicam2</li>
+                    <li>mdicam3</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+    const barCanvas = document.getElementById("graphic-capteur");
+
+
+    new Chart(barCanvas, {
+        type: "bar",
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                data: {{ data|safe }},
+                backgroundColor: [
+                    "#29CB97",
+                    "#0062FF",
+                ],
+                tension: 0.1,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    ticks: {
+                        fonts: {
+                            size: "5px"
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+{% block message %}
+
+{{ all_message }}
+{% endblock %}
+
+{% endblock content %}

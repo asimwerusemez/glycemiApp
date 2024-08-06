@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap/css_bootstrap.css' %}">
+  <script src="{% static 'css/bootstrap/bootstrap.js' %}" defer></script>
+
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h3>Bienvenue sur GlycemieApp</h3>
+        <p>Commençons avec votre compte Docteur</p>
+    </div>
+    <form class="container text-center mt-5 mb-5 col-sm-4" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <p>Vous avez déjà un compte? <a href="{% url 'accounts:login' %}">Se connecter</a></p>
+        <button type="submit" class="btn" style="background-color: #6A1557; color: #fff;">S'inscrire</button>
+      </form>
+</body>
+</html>
