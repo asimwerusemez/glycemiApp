@@ -15,60 +15,73 @@
                 <img src="{{ user.photo_profile.url }}" alt="" width="100">
                 <div>
                     <p> {{ user.username }} </p>
-                    <p><a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                    <p><a href="mailto:{{ user.email }}" style="color: black; text-decoration: none;">{{ user.email }}</a></p>
                 </div>
             </div>
+            <hr>
+
             <div>
-                <h5>L'etant du patient</h5>
-                <p>Taux du sucre <strong>{{ user.gycemie.taux_sucre }}g</strong></p>
-                {% if user.gycemie.soif_intense == 0 %}
-                    <p>Soif intensif <strong>Non</strong></p>
-                {% else %}
-                    <p>Soif intensif <strong>Oui</strong></p>
-                {% endif %}
-                
-                {% if user.gycemie.fatigue_extreme == 0 %}
-                    <p>Fatigue extreme <strong>Non</strong></p>
-                {% else %}
-                    <p>Fatigue extreme <strong>Oui</strong></p>
-                {% endif %}
 
-                {% if user.gycemie.vision_flou == 0 %}
-                    <p>Vision flou <strong>Non</strong></p>
-                {% else %}
-                    <p>Vision flou <strong>Oui</strong></p>
-                {% endif %}
+                <h5 style="color: black; font-size: 22px; margin: 19px 0; font-weight: 900;">L'etant du patient</h5>
 
-                {% if user.gycemie.secheresse_bouche == 0 %}
-                    <p>Secheresse bouche <strong>Non</strong></p>
-                {% else %}
-                    <p>Secheresse bouche <strong>Oui</strong></p>
-                {% endif %}
+                <div class="contain-etant-all">
+                    <div class="fist-etant">  
+                        <p>Taux du sucre : <strong>{{ user.gycemie.taux_sucre }}g</strong></p>
+                        {% if user.gycemie.soif_intense == 0 %}
+                            <p>Soif intensif : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Soif intensif : <strong>Oui</strong></p>
+                        {% endif %}
+                        
+                        {% if user.gycemie.fatigue_extreme == 0 %}
+                            <p>Fatigue extreme : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Fatigue extreme : <strong>Oui</strong></p>
+                        {% endif %}
+    
+                        {% if user.gycemie.vision_flou == 0 %}
+                            <p>Vision flou : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Vision flou : <strong>Oui</strong></p>
+                        {% endif %}
+                    </div>
+    
+                    <div class="second-etant">
+                        {% if user.gycemie.secheresse_bouche == 0 %}
+                        <p>Secheresse bouche : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Secheresse bouche : <strong>Oui</strong></p>
+                        {% endif %}
+    
+                        {% if user.gycemie.perte_poid == 0 %}
+                            <p>Perte poid : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Perte poid : <strong>Oui</strong></p>
+                        {% endif %}
+    
+                        {% if user.gycemie.cicatrisation_lente == 0 %}
+                            <p>Cicatrisation lente : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Cicatrisation lente : <strong>Oui</strong></p>
+                        {% endif %}
+    
+                        {% if user.gycemie.infection_frequente == 0 %}
+                            <p>Infection frequente : <strong>Non</strong></p>
+                        {% else %}
+                            <p>Infection frequente : <strong>Oui</strong></p>
+                        {% endif %}
+                    </div>
+                </div>
 
-                {% if user.gycemie.perte_poid == 0 %}
-                    <p>Perte poid <strong>Non</strong></p>
-                {% else %}
-                    <p>Perte poid <strong>Oui</strong></p>
-                {% endif %}
-
-                {% if user.gycemie.cicatrisation_lente == 0 %}
-                    <p>Cicatrisation lente <strong>Non</strong></p>
-                {% else %}
-                    <p>Cicatrisation lente <strong>Oui</strong></p>
-                {% endif %}
-
-                {% if user.gycemie.infection_frequente == 0 %}
-                    <p>Infection frequente <strong>Non</strong></p>
-                {% else %}
-                    <p>Infection frequente <strong>Oui</strong></p>
-                {% endif %}
             </div>
-            <div>
-                <p><a href="{% url 'doctor:sendMessage'%}">Envoyer un Message</a></p>
-                <p><a href="#">consulter</a></p>
+
+            <div class="suivi-link" style="margin-top: 20px;">
+                <p><a href="{% url 'doctor:MessageSendDoctor' user.id %}"><button class="link-message">Envoyer un Message</button></a></p>
+                <p><a href="{% url 'doctor:suivi_patient' user.id %}"><button class="link-consulting">consulter</button></a></p>
             </div>
+
         </div>
-            {% endfor %}
+    {% endfor %}
     </div>
 </section>
 

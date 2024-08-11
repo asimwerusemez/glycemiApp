@@ -11,7 +11,8 @@ class User(AbstractUser):
     photo_profile = models.ImageField(upload_to="photos_profile")
     isDoctor = models.BooleanField(default=False)
     isPatient = models.BooleanField(default=False)
-
+    unread_count = models.IntegerField(default=0)
+    
     gycemie = models.ForeignKey(GycemieData, on_delete=models.CASCADE, blank=True, null=True)
 
     def save(self, *args, **kwargs):

@@ -19,29 +19,29 @@
         </div>
 
         <div class="aside-see col-md-4">
-            <div class="evolutions">
-                <h5>cas critiques détecter par le capteur </h5>
-
-                <p>25 sur 120 patients</p>
-                <div>
-                </div>
-            </div>
-
             <div class="Alimentation">
                 <h3>Alimentation Proposés</h3>
                 <ul>
-                    <li>Legumes</li>
-                    <li>Viandes</li>
-                    <li>Poissons</li>
+                    {% for alimentation in alimentations %}
+                            {% if alimentation %}
+                                <li>{{ alimentation.nom }}</li>  
+                            {% else %}
+                                <li>aucun</li>
+                            {% endif %}               
+                    {% endfor %}
                 </ul>
             </div>
 
             <div class="Alimentation">
                 <h3>Médicaments Proposés</h3>
                 <ul>
-                    <li>mdicam1</li>
-                    <li>mdicam2</li>
-                    <li>mdicam3</li>
+                    {% for medicament in medicaments %}
+                            {% if medicament %}
+                                <li>{{ medicament.nom }}</li> 
+                            {% else %}
+                                <li>aucun</li>
+                            {% endif %}               
+                    {% endfor %}
                 </ul>
             </div>
 

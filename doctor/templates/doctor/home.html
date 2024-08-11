@@ -9,7 +9,7 @@
         <div class="main-see col-md-8">
             <div class="main-see_show">
                 <div class="Total-patient">
-                    <h1>Total Patients</h1>
+                    <h4>Total Patients</h4>
                     <div>
                         <h2>{{ all_users }}</h2>
                         <div>
@@ -19,9 +19,9 @@
                 </div>
 
                 <div class="critique-Total">
-                    <h4>Total cas critique en pourcentage</h4>
+                    <h4>cas critique en pourcentage</h4>
                     <div>
-                        <h2>50%</h2>
+                        <h2> {{ pourcent }}%</h2>
                         <div>
                             <img src="{% static 'images/pourcentage_patients.png' %}" alt="">
                         </div>
@@ -44,26 +44,28 @@
             <div class="evolutions">
                 <h5>cas critiques détecter par le capteur </h5>
 
-                <p>25 sur 120 patients</p>
+                <p>{{ nb_patient_down }} sur {{ all_users }} patients</p>
                 <div>
                 </div>
             </div>
 
             <div class="Alimentation">
                 <h3>Alimentation</h3>
+
                 <ul>
-                    <li>Legumes</li>
-                    <li>Viandes</li>
-                    <li>Poissons</li>
+                    {% for alimentation in alimentations %}
+                            <li>{{ alimentation.nom }}</li>                
+                    {% endfor %}
                 </ul>
+                
             </div>
 
             <div class="Alimentation">
                 <h3>Médicaments</h3>
                 <ul>
-                    <li>mdicam1</li>
-                    <li>mdicam2</li>
-                    <li>mdicam3</li>
+                    {% for medicament in medicaments %}
+                            <li>{{ medicament.nom }}</li>                
+                    {% endfor %}
                 </ul>
             </div>
 

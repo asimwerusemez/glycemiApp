@@ -23,7 +23,7 @@
 </head>
 <body>
 
-  <header id="header" class="header sticky-top">
+  <header id="header" class="header">
 
     <div class="top_top__bar">
       <div class="topbar d-flex align-items-center container">
@@ -38,9 +38,10 @@
         </div>
 
         <div class="message-notification">
-          <p><a href="{% url 'doctor:sendMessage' %}"><i class="fa-solid fa-message"></i></a></p>
+          <p><a href="{% url 'doctor:allPatientsMessages' %}"><i class="fa-solid fa-message"></i></a></p>
           <span>
             {% block message %}
+            
             {% endblock %}
           </span>
         </div>
@@ -51,8 +52,9 @@
       </div>
     </div>
 
-    <div class="branding d-flex align-items-center">
-      <div class="container position-relative d-flex align-items-center justify-content-between">
+    <div class="branding d-flex align-items-center sticky-top">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between ">
 
         <a href="/doctor/" class="logo d-flex align-items-center me-auto">
           <img src="{% static 'images/logo.png' %}" alt="logo">
@@ -62,11 +64,11 @@
           <ul>
             <li><a href="/doctor/" class="active">Accueil<br></a></li>
             <li><a href="{% url 'doctor:suivi' %}">Suivis</a></li>
-            <li><a href="#">Patients</a></li>
           </ul>
         </nav>
       </div>
     </div>
+
   </header>
 
   {% block content %}

@@ -1,0 +1,80 @@
+{% extends 'base_doctor.html' %}
+
+{% block message %}
+{{ all_message }}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<section class="container all-patients-message-and-doctor">
+
+    <section class="all-patients-message">
+        <div class="">
+            {% for users_message in users_messages %}
+            <a href="{% url 'doctor:MessageSendPatients' users_message.destinateur.id %}" style="text-decoration: none;">
+                <div class="one-patient one-patient-hover">
+                    <img src="{{ users_message.destinateur.photo_profile.url }}" alt="{{ users_message.destinateur.username }}" width="50">
+                    <div class="procf-patien">
+                        <div>
+                            <h5>{{ users_message.destinateur.username }}</h5>
+                            <p>{{ users_message.created_at }}</p>
+                        </div>
+                        <p class="message-on-see">{{ users_message.message }}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if selected_user %}
+    <section class="mt-2 mb-5 all-doctor-message">
+        <div class="all-message-see-doc">
+            <div class="all-message-see-doc all-patients-message">
+                {% for message in messages_recus %}
+                    {% if message.expediteur.isDoctor %}
+                        <div class="one-patient doctor-messages-st">
+                            <img src="{{ message.expediteur.photo_profile.url }}" alt="{{ users_message.destinateur.username }}">
+                            <div class="procf-patien">
+                                <div>
+                                    <h5>{{ message.expediteur.username }}</h5>
+                                    <p>{{ message.created_at }}</p>
+                                </div>
+                                <p class="message-on-see">{{ message.message }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                <div class="msg-doct" style="margin-left: 45px;">
+                    <img src="{{ message.expediteur.photo_profile.url }}" alt="" width="50">
+                    <div>
+                        <div class="data-name">
+                            <p class="name">{{ message.expediteur.username }}</p>
+                            <p class="date">{{ message.created_at }}</p>
+                        </div>
+                        <p>{{ message.message }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% empty %}
+                <ul>
+                    <li>Pas encore des messages</li>
+                </ul>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+        <form method="post" enctype="multipart/form-data" class="form-message-send">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-messages"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+    </section>
+    {% endif %}
+
+</section>
+
+{% endblock content %}

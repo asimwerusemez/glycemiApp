@@ -8,6 +8,7 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("doctor/", include("doctor.urls")),
     path("patient/", include("patient.urls")),
+    path("", include("home.urls")),
 ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 if settings.DEBUG:

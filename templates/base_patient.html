@@ -38,9 +38,10 @@
         </div>
 
         <div class="message-notification">
-          <p><a href="{% url 'doctor:sendMessage' %}"><i class="fa-solid fa-message"></i></a></p>
+          <p><a href="{% url 'patient:MessageToDoctor' %}"><i class="fa-solid fa-message"></i></a></p>
           <span>
             {% block message %}
+            
             {% endblock %}
           </span>
         </div>
@@ -54,14 +55,14 @@
     <div class="branding d-flex align-items-center">
       <div class="container position-relative d-flex align-items-center justify-content-between">
 
-        <a href="/doctor/" class="logo d-flex align-items-center me-auto">
+        <a href="/patient/" class="logo d-flex align-items-center me-auto">
           <img src="{% static 'images/logo.png' %}" alt="logo">
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
             <li><a href="/patient/" class="active">Accueil<br></a></li>
-            <li><a href="#">Consultation</a></li>
+            <li><a href="{% url 'patient:consultation'  %}">Consultation</a></li>
           </ul>
         </nav>
       </div>

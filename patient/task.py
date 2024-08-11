@@ -14,6 +14,12 @@ PERTE_POIDS_CHOICES = [0, 1]
 CICATRISATION_LENTE_CHOICES = [0, 1]
 INFECTION_FRENQUENTE_CHOICES = [0, 1]
 
+
+@shared_task
+def simple_task():
+    print("Task executed successfully")
+
+
 @shared_task
 def update_glycemic_data():
     users = User.objects.filter(isPatient=True)
@@ -34,6 +40,7 @@ def update_glycemic_data():
             return f"Erreur lors de la mise à jour de l'utilisateur {user.id}: {e}"
 
     # Appel récursif pour exécuter la tâche toutes les 3 minutes
-    update_glycemic_data.apply_async(countdown=30)
+    update_glycemic_data.apply_async(countdown=10)
 
 
+simple_task()
